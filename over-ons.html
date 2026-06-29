@@ -5,15 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Over ons — CleverPage</title>
   <meta name="description" content="Wie is CleverPage? Ontdek ons verhaal, onze waarden en het team achter jouw website." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://cleverpage.nl/over-ons.html" />
+  <meta property="og:title" content="Over ons — CleverPage" />
+  <meta property="og:description" content="Ontdek het verhaal en het team achter CleverPage." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cleverpage.nl/over-ons.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#5a8a6a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-pagina="over-ons">
-
+  <a class="skip-link" href="#main-content">Spring naar de inhoud</a>
   <header class="nav" id="nav"></header>
 
+  <main id="main-content">
   <section class="page-hero">
     <div class="wrap">
       <h1 id="pagina-titel"></h1>
@@ -23,9 +32,9 @@
 
   <!-- Verhaal -->
   <section class="sectie">
-    <div class="wrap" style="max-width:720px">
+    <div class="wrap story-wrap">
       <h2>Ons verhaal</h2>
-      <p class="sectie-intro" id="verhaal" style="max-width:100%;margin-top:16px"></p>
+      <p class="sectie-intro story-copy" id="verhaal"></p>
     </div>
   </section>
 
@@ -53,8 +62,10 @@
 
   <footer class="footer" id="footer"></footer>
 
-  <script src="config.js"></script>
-  <script src="nav.js"></script>
+  </main>
+
+  <script defer src="config.js"></script>
+  <script defer src="nav.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const d = C.overOns;
@@ -86,7 +97,7 @@
         div.innerHTML =
           '<div class="team-foto">' +
             (lid.foto
-              ? '<img src="' + lid.foto + '" alt="' + lid.naam + '" />'
+              ? '<img src="' + lid.foto + '" alt="' + lid.naam + '" loading="lazy" decoding="async" width="240" height="240" />'
               : '<span class="team-foto-ph">FOTO</span>') +
           '</div>' +
           '<h3>' + lid.naam + '</h3>' +

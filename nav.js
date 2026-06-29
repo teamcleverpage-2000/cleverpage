@@ -14,15 +14,17 @@
     const huidigePagina = document.body.dataset.pagina || '';
 
     const menuHtml = C.nav.map(function (item) {
-      const actief = item.url.replace('.html', '') === huidigePagina ? ' actief' : '';
+      const actief = item.url.replace('.html', '') === huidigePagina;
+      const actiefClass = actief ? ' actief' : '';
       const cta    = item.cta ? ' nav-cta' : '';
-      return '<a href="' + item.url + '" class="' + (actief + cta).trim() + '">' + item.label + '</a>';
+      const ariaCurrent = actief ? ' aria-current="page"' : '';
+      return '<a href="' + item.url + '" class="' + (actiefClass + cta).trim() + '"' + ariaCurrent + '>' + item.label + '</a>';
     }).join('');
 
     nav.innerHTML =
       '<div class="nav-inner">' +
         '<a href="index.html" class="nav-logo">' +
-          '<img src="img/logo.png" alt="' + C.bedrijfsnaam + ' logo" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'" />' +
+          '<img src="img/logo.png" alt="' + C.bedrijfsnaam + ' logo" loading="eager" decoding="async" fetchpriority="high" width="120" height="34" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'block\'" />' +
           '<span class="nav-logo-naam" style="display:none">' + C.bedrijfsnaam + '</span>' +
         '</a>' +
         '<nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Hoofdmenu">' +
@@ -66,7 +68,7 @@
     const socials = C.socials.filter(function (s) {
       return s.url && !s.url.startsWith('INVULLEN');
     }).map(function (s) {
-      return '<a href="' + s.url + '" target="_blank" rel="noopener">' + s.icoon + ' ' + s.platform + '</a>';
+      return '<a href="' + s.url + '" target="_blank" rel="noopener noreferrer">' + s.icoon + ' ' + s.platform + '</a>';
     }).join('');
 
     footer.innerHTML =

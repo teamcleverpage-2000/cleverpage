@@ -30,11 +30,36 @@
 }
 
 html  { scroll-behavior: smooth; font-size: 16px; }
-body  { font-family: var(--font); color: var(--tekst); background: var(--wit); line-height: 1.65; -webkit-font-smoothing: antialiased; }
-img   { max-width: 100%; display: block; }
+body  {
+  font-family: var(--font);
+  color: var(--tekst);
+  background: var(--wit);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color-scheme: light;
+}
+img   { max-width: 100%; display: block; height: auto; }
 a     { color: var(--g-donker); text-decoration: none; }
 a:hover { color: var(--g-diep); }
 ul    { list-style: none; }
+main { display: block; }
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 16px;
+  z-index: 1000;
+  padding: 10px 16px;
+  border-radius: 0 0 var(--r) var(--r);
+  background: var(--g-donker);
+  color: var(--wit);
+  transition: top .2s ease;
+}
+.skip-link:focus { top: 0; }
+:focus-visible {
+  outline: 3px solid rgba(90, 138, 106, .35);
+  outline-offset: 2px;
+}
 
 /* ── Typografie ─────────────────────────────────────────── */
 h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; }
@@ -48,6 +73,16 @@ em { font-style: normal; color: var(--g-donker); }
 .sectie      { padding: 96px 0; }
 .sectie-smal { padding: 72px 0; }
 .sectie-intro { font-size: 1.1rem; color: var(--tekst-zacht); max-width: 580px; margin-top: 14px; }
+.sectie,
+.page-hero,
+.home-hero,
+.cta-balk,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+.story-wrap { max-width: 720px; }
+.story-copy { max-width: 100%; margin-top: 16px; }
 
 .sectie-kop          { margin-bottom: 56px; }
 .sectie-kop h2       { margin-bottom: 12px; }
