@@ -5,15 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CleverPage — Slim online. Snel live.</title>
   <meta name="description" content="CleverPage bouwt professionele websites voor MKB en ZZP. Snel, doordacht en betaalbaar — binnen een week live." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://cleverpage.nl/" />
+  <meta property="og:title" content="CleverPage — Slim online. Snel live." />
+  <meta property="og:description" content="Professionele websites voor MKB en ZZP — snel, doordacht en betaalbaar." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cleverpage.nl/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#5a8a6a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body data-pagina="index">
-
+  <a class="skip-link" href="#main-content">Spring naar de inhoud</a>
   <header class="nav" id="nav"></header>
 
+  <main id="main-content">
   <!-- HERO -->
   <section class="home-hero">
     <div class="wrap">
@@ -66,8 +75,10 @@
 
   <footer class="footer" id="footer"></footer>
 
-  <script src="config.js"></script>
-  <script src="nav.js"></script>
+  </main>
+
+  <script defer src="config.js"></script>
+  <script defer src="nav.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const d = C.home;
@@ -123,7 +134,7 @@
         div.innerHTML =
           '<div class="portfolio-beeld">' +
             (p.afbeelding
-              ? '<img src="' + p.afbeelding + '" alt="' + p.naam + '" />'
+              ? '<img src="' + p.afbeelding + '" alt="' + p.naam + '" loading="lazy" decoding="async" width="600" height="400" />'
               : '<span class="foto-ph">FOTO: ' + p.naam + '</span>') +
           '</div>' +
           '<div class="portfolio-info">' +
