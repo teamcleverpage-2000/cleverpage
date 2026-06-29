@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prijzen — CleverPage</title>
+  <meta name="description" content="Duidelijke tarieven zonder verborgen kosten. One-pager vanaf €100 eenmalig, daarna €50 per maand." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-pagina="prijzen">
+
+  <header class="nav" id="nav"></header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1 id="pagina-titel"></h1>
+      <p class="sectie-intro" id="pagina-intro"></p>
+    </div>
+  </section>
+
+  <!-- Pakketten -->
+  <section class="sectie">
+    <div class="wrap">
+      <div class="prijzen-grid" id="prijzen-grid"></div>
+      <p class="disclaimer" id="disclaimer"></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sectie bg-grijs">
+    <div class="wrap">
+      <div class="sectie-kop">
+        <h2>Veelgestelde vragen</h2>
+        <p class="sectie-intro">Staat je vraag er niet bij? Neem gerust contact op.</p>
+      </div>
+      <div class="faq-lijst" id="faq-lijst"></div>
+    </div>
+  </section>
+
+  <section class="cta-balk">
+    <div class="wrap">
+      <h2>Klaar om te starten?</h2>
+      <a href="contact.html" class="btn btn-wit">Plan een gratis gesprek</a>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const d = C.prijzen;
+
+      document.getElementById('pagina-titel').textContent = d.paginaTitel;
+      document.getElementById('pagina-intro').textContent = d.intro;
+      document.getElementById('disclaimer').textContent   = d.disclaimer;
+
+      // Pakketten
+      const grid = document.getElementById('prijzen-grid');
+      d.pakketten.forEach(function (pk) {
+        const inbegrepen = pk.inbegrepen.map(function (i) {
+          return '<li>' + i + '</li>';
+        }).join('');
+        const niet = pk.nietInbegrepen.length
+          ? '<p class="pk-niet-label">Niet inbegrepen</p><ul class="pk-lijst niet">' +
+            pk.nietInbegrepen.map(function (i) { return '<li>' + i + '</li>'; }).join('') +
+            '</ul>'
+          : '';
+        const div = document.createElement('div');
+        div.className = 'prijzen-kaart' + (pk.uitgelicht ? ' uitgelicht' : '');
+        div.innerHTML =
+          (pk.uitgelicht ? '<span class="badge-top">Meest gekozen</span>' : '') +
+          '<h3>' + pk.naam + '</h3>' +
+          '<p class="pk-beschrijving">' + pk.beschrijving + '</p>' +
+          '<div class="pk-prijs">' +
+            '<strong>' + pk.prijs + '</strong>' +
+            '<span class="per">' + pk.per + '</span>' +
+            '<span class="maand">' + pk.maand + '</span>' +
+          '</div>' +
+          '<ul class="pk-lijst">' + inbegrepen + '</ul>' +
+          niet +
+          '<a href="' + pk.knopLink + '" class="btn btn-primair">' + pk.knopTekst + '</a>';
+        grid.appendChild(div);
+      });
+
+      // FAQ
+      const faqLijst = document.getElementById('faq-lijst');
+      d.faq.forEach(function (item) {
+        const div = document.createElement('div');
+        div.className = 'faq-item';
+        div.innerHTML =
+          '<button class="faq-vraag">' + item.vraag + '</button>' +
+          '<p class="faq-antwoord">' + item.antwoord + '</p>';
+        faqLijst.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

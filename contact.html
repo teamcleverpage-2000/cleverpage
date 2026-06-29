@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — CleverPage</title>
+  <meta name="description" content="Neem contact op met CleverPage. We reageren binnen 24 uur met een vrijblijvend voorstel." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-pagina="contact">
+
+  <header class="nav" id="nav"></header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1 id="pagina-titel"></h1>
+      <p class="sectie-intro" id="pagina-intro"></p>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="wrap">
+      <div class="contact-layout">
+
+        <!-- Linker kolom: gegevens -->
+        <div class="contact-links">
+          <h2 style="margin-bottom:28px">Bereikbaar via</h2>
+          <div id="contact-gegevens"></div>
+
+          <div style="margin-top:40px">
+            <h3 style="margin-bottom:12px;font-size:1rem">Reactietijd</h3>
+            <p style="font-size:.9rem;color:var(--tekst-zacht)">We reageren doorgaans binnen <strong>24 uur</strong> op werkdagen. Liever direct bellen? Dat kan ook.</p>
+          </div>
+        </div>
+
+        <!-- Rechter kolom: formulier -->
+        <div>
+          <h2 style="margin-bottom:24px">Stuur een bericht</h2>
+          <form class="formulier" id="contact-formulier" novalidate>
+            <div class="form-rij">
+              <div class="form-veld">
+                <label for="f-naam">Naam *</label>
+                <input type="text" id="f-naam" name="naam" placeholder="Jouw naam" required />
+              </div>
+              <div class="form-veld">
+                <label for="f-email">E-mailadres *</label>
+                <input type="email" id="f-email" name="email" placeholder="jouw@email.nl" required />
+              </div>
+            </div>
+            <div class="form-rij">
+              <div class="form-veld">
+                <label for="f-bedrijf">Bedrijfsnaam</label>
+                <input type="text" id="f-bedrijf" name="bedrijf" placeholder="Optioneel" />
+              </div>
+              <div class="form-veld">
+                <label for="f-dienst">Ik ben geïnteresseerd in</label>
+                <select id="f-dienst" name="dienst">
+                  <option value="">Kies een dienst…</option>
+                  <option value="One-pager">One-page website</option>
+                  <option value="Multi-page">Multi-page website</option>
+                  <option value="CMS">Zelfbeheer / CMS</option>
+                  <option value="Onderhoud">Onderhoud & support</option>
+                  <option value="Anders">Anders / weet ik nog niet</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-veld">
+              <label for="f-bericht">Bericht *</label>
+              <textarea id="f-bericht" name="bericht" placeholder="Vertel kort wat je zoekt. Heb je al een website? Wat werkt er niet?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primair" id="form-knop">Verstuur bericht</button>
+            <p class="form-status" id="form-status"></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const d = C.contact;
+
+      document.getElementById('pagina-titel').textContent = d.paginaTitel;
+      document.getElementById('pagina-intro').textContent = d.intro;
+
+      // Gegevens
+      const cg = document.getElementById('contact-gegevens');
+      d.gegevens.forEach(function (g) {
+        const div = document.createElement('div');
+        div.className = 'contact-gegeven';
+        div.innerHTML =
+          '<span class="contact-gegeven-icoon">' + g.icoon + '</span>' +
+          '<div>' +
+            '<div class="contact-gegeven-label">' + g.label + '</div>' +
+            '<div class="contact-gegeven-waarde"><a href="' + g.link + '">' + g.tekst + '</a></div>' +
+          '</div>';
+        cg.appendChild(div);
+      });
+    });
+  </script>
+</body>
+</html>

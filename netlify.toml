@@ -1,0 +1,38 @@
+# ============================================================
+#  CleverPage — netlify.toml
+#  Netlify deployment configuratie
+# ============================================================
+
+[build]
+  publish = "."        # Root van de repo is de publishmap
+  command = ""         # Geen build-stap nodig (pure HTML/CSS/JS)
+
+# Identity & Git Gateway inschakelen voor het CMS
+# → Ga in Netlify naar: Site settings > Identity > Enable
+# → Daarna: Identity > Services > Git Gateway > Enable
+
+[[redirects]]
+  from = "/admin"
+  to   = "/admin/index.html"
+  status = 200
+
+# Cache-headers voor betere performance
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

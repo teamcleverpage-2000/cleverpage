@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diensten — CleverPage</title>
+  <meta name="description" content="Wat doet CleverPage? One-pagers, multi-page websites, CMS, hosting en onderhoud voor MKB en ZZP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-pagina="diensten">
+
+  <header class="nav" id="nav"></header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1 id="pagina-titel"></h1>
+      <p class="sectie-intro" id="pagina-intro"></p>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="wrap">
+      <div class="diensten-grid" id="diensten-grid"></div>
+    </div>
+  </section>
+
+  <section class="cta-balk" id="cta-balk"></section>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const d = C.diensten;
+
+      document.getElementById('pagina-titel').textContent = d.paginaTitel;
+      document.getElementById('pagina-intro').textContent = d.intro;
+
+      const grid = document.getElementById('diensten-grid');
+      d.lijst.forEach(function (item) {
+        const puntenHtml = item.punten.map(function (p) {
+          return '<li>' + p + '</li>';
+        }).join('');
+        const div = document.createElement('div');
+        div.className = 'dienst-kaart';
+        div.innerHTML =
+          '<div class="dienst-icoon">' + item.icoon + '</div>' +
+          '<h3>' + item.naam + '</h3>' +
+          '<p>' + item.tekst + '</p>' +
+          '<ul class="dienst-punten">' + puntenHtml + '</ul>';
+        grid.appendChild(div);
+      });
+
+      const cb = d.ctaBalk;
+      document.getElementById('cta-balk').innerHTML =
+        '<div class="wrap"><h2>' + cb.tekst + '</h2><a href="' + cb.knopLink + '" class="btn btn-wit">' + cb.knopTekst + '</a></div>';
+    });
+  </script>
+</body>
+</html>

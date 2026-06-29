@@ -1,0 +1,181 @@
+# ============================================================
+#  CleverPage — Netlify CMS configuratie
+#  Bewerk dit bestand als je nieuwe velden wilt toevoegen.
+#  Documentatie: https://www.netlifycms.org/docs/
+# ============================================================
+
+backend:
+  name: git-gateway
+  branch: main  # Wijzig naar jouw branch-naam als je niet "main" gebruikt
+
+# Mediabestanden (logo's, foto's) gaan naar /img
+media_folder: "img"
+public_folder: "/img"
+
+# Taal van het CMS-dashboard
+locale: "nl"
+
+collections:
+
+  # ── Algemene instellingen ─────────────────────────────
+  - name: "instellingen"
+    label: "⚙️ Instellingen"
+    files:
+
+      - name: "algemeen"
+        label: "Algemeen & contact"
+        file: "_data/algemeen.json"
+        fields:
+          - { label: "Bedrijfsnaam",     name: "bedrijfsnaam",     widget: "string" }
+          - { label: "Slogan",           name: "slogan",           widget: "string" }
+          - { label: "E-mailadres",      name: "emailadres",       widget: "string" }
+          - { label: "Telefoonnummer",   name: "telefoonnummer",   widget: "string" }
+          - { label: "Adres",            name: "adres",            widget: "string" }
+          - { label: "KVK-nummer",       name: "kvkNummer",        widget: "string", required: false }
+          - { label: "Google Maps link", name: "mapsLink",         widget: "string", required: false }
+          - label: "Socials"
+            name: "socials"
+            widget: "list"
+            fields:
+              - { label: "Platform", name: "platform", widget: "string" }
+              - { label: "URL",      name: "url",      widget: "string" }
+              - { label: "Icoon",    name: "icoon",    widget: "string" }
+
+  # ── Home ─────────────────────────────────────────────
+  - name: "home"
+    label: "🏠 Home"
+    files:
+
+      - name: "home"
+        label: "Home pagina"
+        file: "_data/home.json"
+        fields:
+          - { label: "Hero eyebrow",  name: "heroEyebrow",  widget: "string" }
+          - { label: "Hero titel",    name: "heroTitel",    widget: "string" }
+          - { label: "Hero subtitel", name: "heroSubtitel", widget: "text" }
+          - label: "Hero stats"
+            name: "heroStats"
+            widget: "list"
+            fields:
+              - { label: "Getal/tekst", name: "getal", widget: "string" }
+              - { label: "Label",       name: "label", widget: "string" }
+          - label: "USP's (voordelen)"
+            name: "usp"
+            widget: "list"
+            fields:
+              - { label: "Icoon (emoji)", name: "icoon", widget: "string" }
+              - { label: "Titel",         name: "titel", widget: "string" }
+              - { label: "Tekst",         name: "tekst", widget: "text" }
+          - label: "Werkwijze stappen"
+            name: "stappen"
+            widget: "list"
+            fields:
+              - { label: "Titel", name: "titel", widget: "string" }
+              - { label: "Tekst", name: "tekst", widget: "text" }
+
+  # ── Diensten ─────────────────────────────────────────
+  - name: "diensten"
+    label: "🛠️ Diensten"
+    files:
+
+      - name: "diensten"
+        label: "Diensten pagina"
+        file: "_data/diensten.json"
+        fields:
+          - { label: "Paginatitel", name: "paginaTitel", widget: "string" }
+          - { label: "Intro",       name: "intro",       widget: "text" }
+          - label: "Diensten"
+            name: "lijst"
+            widget: "list"
+            fields:
+              - { label: "Icoon (emoji)", name: "icoon", widget: "string" }
+              - { label: "Naam",          name: "naam",  widget: "string" }
+              - { label: "Beschrijving",  name: "tekst", widget: "text" }
+              - label: "Punten (lijst)"
+                name: "punten"
+                widget: "list"
+                field: { label: "Punt", name: "punt", widget: "string" }
+
+  # ── Portfolio ─────────────────────────────────────────
+  - name: "portfolio"
+    label: "🖼️ Portfolio"
+    folder: "_data/projecten"
+    create: true
+    slug: "{{slug}}"
+    label_singular: "Project"
+    fields:
+      - { label: "Naam",          name: "naam",          widget: "string" }
+      - { label: "Branche",       name: "branche",       widget: "string" }
+      - { label: "Beschrijving",  name: "beschrijving",  widget: "text" }
+      - { label: "Afbeelding",    name: "afbeelding",    widget: "image", required: false }
+      - { label: "Website URL",   name: "url",           widget: "string", required: false }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        field: { label: "Tag", name: "tag", widget: "string" }
+
+  # ── Prijzen ───────────────────────────────────────────
+  - name: "prijzen"
+    label: "💶 Prijzen"
+    files:
+
+      - name: "prijzen"
+        label: "Prijzen pagina"
+        file: "_data/prijzen.json"
+        fields:
+          - { label: "Paginatitel", name: "paginaTitel", widget: "string" }
+          - { label: "Intro",       name: "intro",       widget: "text" }
+          - { label: "Disclaimer",  name: "disclaimer",  widget: "text" }
+          - label: "Pakketten"
+            name: "pakketten"
+            widget: "list"
+            fields:
+              - { label: "Naam",         name: "naam",       widget: "string" }
+              - { label: "Prijs",        name: "prijs",      widget: "string" }
+              - { label: "Per (bijv. eenmalig)", name: "per", widget: "string" }
+              - { label: "Maandbedrag",  name: "maand",      widget: "string" }
+              - { label: "Uitgelicht?",  name: "uitgelicht", widget: "boolean", default: false }
+              - { label: "Beschrijving", name: "beschrijving", widget: "text" }
+              - label: "Inbegrepen"
+                name: "inbegrepen"
+                widget: "list"
+                field: { label: "Item", name: "item", widget: "string" }
+              - label: "Niet inbegrepen"
+                name: "nietInbegrepen"
+                widget: "list"
+                field: { label: "Item", name: "item", widget: "string" }
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            fields:
+              - { label: "Vraag",    name: "vraag",    widget: "string" }
+              - { label: "Antwoord", name: "antwoord", widget: "text" }
+
+  # ── Over ons ─────────────────────────────────────────
+  - name: "over-ons"
+    label: "👥 Over ons"
+    files:
+
+      - name: "over-ons"
+        label: "Over ons pagina"
+        file: "_data/over-ons.json"
+        fields:
+          - { label: "Paginatitel", name: "paginaTitel", widget: "string" }
+          - { label: "Intro",       name: "intro",       widget: "text" }
+          - { label: "Verhaal",     name: "verhaal",     widget: "text" }
+          - label: "Waarden"
+            name: "waarden"
+            widget: "list"
+            fields:
+              - { label: "Icoon (emoji)", name: "icoon", widget: "string" }
+              - { label: "Titel",         name: "titel", widget: "string" }
+              - { label: "Tekst",         name: "tekst", widget: "text" }
+          - label: "Team"
+            name: "team"
+            widget: "list"
+            fields:
+              - { label: "Naam",     name: "naam",     widget: "string" }
+              - { label: "Functie",  name: "functie",  widget: "string" }
+              - { label: "Bio",      name: "bio",      widget: "text" }
+              - { label: "Foto",     name: "foto",     widget: "image", required: false }
+              - { label: "LinkedIn", name: "linkedin", widget: "string", required: false }

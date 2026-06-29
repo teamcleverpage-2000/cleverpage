@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — CleverPage</title>
+  <meta name="description" content="Bekijk websites die CleverPage heeft gebouwd voor lokale MKB-ondernemers en ZZP'ers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-pagina="portfolio">
+
+  <header class="nav" id="nav"></header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1 id="pagina-titel"></h1>
+      <p class="sectie-intro" id="pagina-intro"></p>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <div class="wrap">
+      <div class="portfolio-grid" id="portfolio-grid"></div>
+    </div>
+  </section>
+
+  <section class="cta-balk" id="cta-balk"></section>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const d = C.portfolio;
+
+      document.getElementById('pagina-titel').textContent = d.paginaTitel;
+      document.getElementById('pagina-intro').textContent = d.intro;
+
+      const grid = document.getElementById('portfolio-grid');
+      d.projecten.forEach(function (p) {
+        const tagsHtml = p.tags.map(function (t) {
+          return '<span class="tag">' + t + '</span>';
+        }).join('');
+        const div = document.createElement('div');
+        div.className = 'portfolio-kaart';
+        div.innerHTML =
+          '<div class="portfolio-beeld">' +
+            (p.afbeelding
+              ? '<img src="' + p.afbeelding + '" alt="' + p.naam + '" />'
+              : '<span class="foto-ph">FOTO: ' + p.naam + '</span>') +
+          '</div>' +
+          '<div class="portfolio-info">' +
+            '<div class="tags">' + tagsHtml + '</div>' +
+            '<h3>' + p.naam + '</h3>' +
+            '<p class="portfolio-branche">' + p.branche + '</p>' +
+            '<p class="portfolio-beschrijving">' + p.beschrijving + '</p>' +
+            (p.url ? '<a href="' + p.url + '" target="_blank" rel="noopener" class="portfolio-link">Bekijk live site →</a>' : '') +
+          '</div>';
+        grid.appendChild(div);
+      });
+
+      const cb = d.ctaBalk;
+      document.getElementById('cta-balk').innerHTML =
+        '<div class="wrap"><h2>' + cb.tekst + '</h2><a href="' + cb.knopLink + '" class="btn btn-wit">' + cb.knopTekst + '</a></div>';
+    });
+  </script>
+</body>
+</html>

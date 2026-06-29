@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Over ons — CleverPage</title>
+  <meta name="description" content="Wie is CleverPage? Ontdek ons verhaal, onze waarden en het team achter jouw website." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-pagina="over-ons">
+
+  <header class="nav" id="nav"></header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1 id="pagina-titel"></h1>
+      <p class="sectie-intro" id="pagina-intro"></p>
+    </div>
+  </section>
+
+  <!-- Verhaal -->
+  <section class="sectie">
+    <div class="wrap" style="max-width:720px">
+      <h2>Ons verhaal</h2>
+      <p class="sectie-intro" id="verhaal" style="max-width:100%;margin-top:16px"></p>
+    </div>
+  </section>
+
+  <!-- Waarden -->
+  <section class="sectie bg-groen">
+    <div class="wrap">
+      <div class="sectie-kop">
+        <h2>Waar we voor staan</h2>
+      </div>
+      <div class="waarden-grid" id="waarden-grid"></div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="sectie">
+    <div class="wrap">
+      <div class="sectie-kop">
+        <h2>Het team</h2>
+      </div>
+      <div class="team-grid" id="team-grid"></div>
+    </div>
+  </section>
+
+  <section class="cta-balk" id="cta-balk"></section>
+
+  <footer class="footer" id="footer"></footer>
+
+  <script src="config.js"></script>
+  <script src="nav.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const d = C.overOns;
+
+      document.getElementById('pagina-titel').textContent = d.paginaTitel;
+      document.getElementById('pagina-intro').textContent = d.intro;
+      document.getElementById('verhaal').textContent      = d.verhaal;
+
+      // Waarden
+      const wg = document.getElementById('waarden-grid');
+      d.waarden.forEach(function (w) {
+        const div = document.createElement('div');
+        div.className = 'waarde-kaart';
+        div.innerHTML =
+          '<div class="waarde-icoon">' + w.icoon + '</div>' +
+          '<h3>' + w.titel + '</h3>' +
+          '<p>' + w.tekst + '</p>';
+        wg.appendChild(div);
+      });
+
+      // Team
+      const tg = document.getElementById('team-grid');
+      d.team.forEach(function (lid) {
+        const linkedin = (lid.linkedin && !lid.linkedin.startsWith('INVULLEN'))
+          ? '<a href="' + lid.linkedin + '" target="_blank" rel="noopener" class="team-linkedin">LinkedIn →</a>'
+          : '';
+        const div = document.createElement('div');
+        div.className = 'team-kaart';
+        div.innerHTML =
+          '<div class="team-foto">' +
+            (lid.foto
+              ? '<img src="' + lid.foto + '" alt="' + lid.naam + '" />'
+              : '<span class="team-foto-ph">FOTO</span>') +
+          '</div>' +
+          '<h3>' + lid.naam + '</h3>' +
+          '<p class="team-functie">' + lid.functie + '</p>' +
+          '<p class="team-bio">' + lid.bio + '</p>' +
+          linkedin;
+        tg.appendChild(div);
+      });
+
+      const cb = d.ctaBalk;
+      document.getElementById('cta-balk').innerHTML =
+        '<div class="wrap"><h2>' + cb.tekst + '</h2><a href="' + cb.knopLink + '" class="btn btn-wit">' + cb.knopTekst + '</a></div>';
+    });
+  </script>
+</body>
+</html>
